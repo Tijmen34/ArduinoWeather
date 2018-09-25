@@ -1,6 +1,6 @@
 # ArduinoWeather
 
-##WeatherStation for the Arduino and Raspberry Pi
+## WeatherStation for the Arduino and Raspberry Pi
 
 This project has been created for school purposes. The project consists 
 of two hardware pieces being connected:
