@@ -33,8 +33,6 @@ DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Start!");
-
   initializeSensors();
 }
 
@@ -51,13 +49,10 @@ void loop() {
   StaticJsonBuffer<200> jsonBuffer;
 
   JsonObject& tempData = jsonBuffer.createObject();
-
   tempData["ds18b20"] = DS18B20Temperature;
-
   JsonObject& dht11 = tempData.createNestedObject("dht11");
   dht11["temperature"] = DHTTemperature;
   dht11["humidity"] = DHTHumidity;
-
   JsonObject& bmp280 = tempData.createNestedObject("bmp280");
   bmp280["temperature"] = BMP280Temperature;
   bmp280["pressure"] = BMP280Pressure;
