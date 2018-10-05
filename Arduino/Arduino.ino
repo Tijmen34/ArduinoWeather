@@ -63,7 +63,8 @@ void loop() {
   bmp280["pressure"] = BMP280Pressure;
   bmp280["altitude"] = BMP280Altitude;
 
-  tempData.prettyPrintTo(Serial);
+  tempData.printTo(Serial);
+  Serial.println();
   
   delay(5000);
 }
