@@ -18,7 +18,8 @@ def insertsensordata(sensorJson):
     try:
         try:
             cursor.execute("INSERT INTO bmp280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
-                           (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["pressure"], sensorJson["bmp280"]))
+                           (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["altitude"],
+                            sensorJson["bmp280"]["pressure"]))
             cursor.execute("INSERT INTO dht11 (temperature, humidity) VALUES (%s, %s)",
                            (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
             cursor.execute("INSERT INTO ds18b20 (temperature) VALUES (%s)",
