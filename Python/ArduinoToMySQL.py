@@ -1,18 +1,25 @@
-import serial
+import datetime
 import json
 import time
+
+import requests
 import mysql.connector
+import serial
 
 db = mysql.connector.connect(host="localhost",
                              user="",
                              password="",
-                             db="")
+                             db="iot")
 
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
+requestparams = {'q': '', 'APPID': ''}
+
 
 def insertsensordata(sensorJson):
+    request = requests.get('http://api.openweathermap.org/data/2.5/weather', params=requestparams)
+    requestData = request.json()
     cursor = db.cursor()
 
     try:
@@ -24,7 +31,11 @@ def insertsensordata(sensorJson):
                            (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
             cursor.execute("INSERT INTO ds18b20 (temperature) VALUES (%s)",
                            (sensorJson["ds18b20"],))
+            cursor.execute("INSERT INTO openweather (temperature, pressure, humidity) VALUES (%s, %s, %s)",
+                           (requestData["main"]["temp"] - 273.15, requestData["main"]["pressure"],
+                            requestData["main"]["humidity"]))
             db.commit()
+            print("Data inserted at ", datetime.datetime.now())
         except mysql.connector.Error as e:
             print(e)
             return None
