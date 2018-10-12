@@ -6,7 +6,7 @@ import requests
 import mysql.connector
 import serial
 
-db = mysql.connector.connect(host="localhost",
+db = mysql.connector.connect(host="127.0.0.1",
                              user="",
                              password="",
                              db="internetofthings")
