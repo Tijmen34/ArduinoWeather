@@ -3,15 +3,34 @@ import connection from '../databases/database'
 
 export const WeatherDataController = {
   getByDates: function(request, response) {
-    let bmp280;
     connection.getConnection((err, conn) => {
-      bmp280 = conn.query("SELECT * FROM bmp280 WHERE id = 1")
+      if (err){
+        response.json(err);
+      } else {
+        conn.query("SELECT * FROM bmp280 WHERE id = 1", (err, rows) => {
+          if (err) {
+            response.json(err)
+          } else {
+            response.json(rows)
+          }
+        })
+      }
     })
-    return response.json(bmp280)
   },
 
   getValue: function(request, response) {
-    const bmp280 = connection.query("SELECT * FROM bmp280 WHERE id = 3")
-    return response.json(bmp280)
+    connection.getConnection((err, conn) => {
+      if (err){
+        response.json(err);
+      } else {
+        conn.query("SELECT * FROM bmp280 WHERE id = 8493", (err, rows) => {
+          if (err) {
+            response.json(err)
+          } else {
+            response.json(rows)
+          }
+        })
+      }
+    })
   }
 }
