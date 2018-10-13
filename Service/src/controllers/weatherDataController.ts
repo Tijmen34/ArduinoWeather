@@ -29,7 +29,7 @@ export const WeatherDataController = {
             response.json(err)
           } else {
             bmp280 = {}
-            bmp280[fields[0].name] = rows
+            bmp280[fields[0].table] = rows
           }
         })
         conn.query("SELECT * FROM dht11 WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
@@ -37,7 +37,7 @@ export const WeatherDataController = {
             response.json(err)
           } else {
             dht11 = {}
-            dht11[fields[0].name] = rows
+            dht11[fields[0].table] = rows
           }
         })
         conn.query("SELECT * FROM ds18b20 WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
@@ -45,7 +45,7 @@ export const WeatherDataController = {
             response.json(err)
           } else {
             ds18b20 = {}
-            ds18b20[fields[0].name] = rows
+            ds18b20[fields[0].table] = rows
           }
         })
         conn.query("SELECT * FROM openweather WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
@@ -53,8 +53,8 @@ export const WeatherDataController = {
             response.json(err)
           } else {
             openweather = {}
-            openweather[fields[0].name] = rows
-            response.json(bmp280, ds18b20, dht11, openweather)
+            openweather[fields[0].table] = rows
+            response.json([bmp280, ds18b20, dht11, openweather])
           }
         })
       }
