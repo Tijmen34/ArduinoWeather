@@ -5,13 +5,12 @@ export const WeatherDataController = {
   getByDates: function(request, response) {
     const startDate = request.params.startDate
     const endDate = request.params.endDate
-    console.log(startDate, endDate)
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
       } else {
         let bmp280, dht11, ds18b20, openweather;
-        conn.query("SELECT * FROM bmp280 WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
+        conn.query("SELECT * FROM bmp280 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
           } else {
@@ -19,7 +18,7 @@ export const WeatherDataController = {
             bmp280[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM dht11 WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
+        conn.query("SELECT * FROM dht11 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
           } else {
@@ -27,7 +26,7 @@ export const WeatherDataController = {
             dht11[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM ds18b20 WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
+        conn.query("SELECT * FROM ds18b20 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
           } else {
@@ -35,7 +34,7 @@ export const WeatherDataController = {
             ds18b20[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM openweather WHERE timestamp BETWEEN '2018-10-10 22:00:00' AND '2018-10-10 23:00:00'", (err, rows, fields) => {
+        conn.query("SELECT * FROM openweather WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
           } else {
