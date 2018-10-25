@@ -2,3 +2,36 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+.weatherdata-row {
+  padding-top: 15px;
+  border-top: 1px solid #cccccc;
+}
+
+.sensordata-column {
+    border-right: 1px solid #cccccc;
+}
+
+.card-title {
+    text-align: center;
+    position: relative;
+    bottom: 20px;
+    font-weight: bolder;
+}
+
+.sensordata-specific-title {
+    text-align: center;
+}
+
+.panel-heading-text {
+    text-align: center;
+}
+
+.temperature-body {
+
+}
+
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}

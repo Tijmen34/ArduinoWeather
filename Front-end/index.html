@@ -1,83 +1,136 @@
 <!doctype html>
-<html lang="en"><head>
-  <title>WeatherStation Data Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<html lang="en">
+<head>
+    <title>WeatherStation Data Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-  <script src="js/main.js"></script>
-  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin=""></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin=""></script>
+    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 </head>
 
 <body>
-  <h1 style="text-align: center;">WeatherStation Data Dashboard</h1>
+<h1 style="text-align: center;">WeatherStation Data Dashboard</h1>
 
-  <div class="container-fluid">
+<div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Live Weather Data
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading-text">
+                        Live Weather Data
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-4 sensordata-column nopadding">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">DHT11</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-md-6 sensordata-column">
+                                        <div class="sensordata-specific-title">Temperature</div>
+                                        <br>
+                                        <div class="temperature-body">
+                                            20 graadjes pik!
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="sensordata-specific-title">Humidity</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 sensordata-column">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">DS18B20</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <div class="sensordata-specific-title">Temperature</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">BMP280</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 sensordata-column">
+                                            <div class="sensordata-specific-title">Temperature</div>
+                                        </div>
+                                        <div class="col-md-4 sensordata-column">
+                                            <div class="sensordata-specific-title">Altitude</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="sensordata-specific-title">Pressure</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row weatherdata-row">
+                        <div class="col-sm-12">
+                            Hier komt weerdata!
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
-          </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Weekly Overview
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading-text">
+                        Weekly Overview
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Pure troep!
+                </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
-          </div>
         </div>
-      </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Monthly Overview
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading-text">
+                        Monthly Overview
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Pure troep!
+                </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
-          </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Custom Overview
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading-text">
+                        Custom Overview
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Pure troep!
+                </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
 
-    <h2>Live Weather Data</h2>
-    <div class="panel panel-default">
-      <div class="panel-body">Hier komt data gap</div>
-    </div>
-  </div>
-
-
-
-
-</body></html>
+</body>
+</html>
