@@ -1,0 +1,6 @@
+/**
+  * On window load.
+  */
+$(function(){
+  
+})
