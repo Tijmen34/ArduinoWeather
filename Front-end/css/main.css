@@ -27,8 +27,11 @@
     text-align: center;
 }
 
-.temperature-body {
 
+.sensordata-specific-data {
+  font-size: 18px;
+  padding-top: 10px;
+  text-align: center;
 }
 
 .nopadding {
