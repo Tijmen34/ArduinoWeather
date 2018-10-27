@@ -8,35 +8,40 @@ export const WeatherDataController = {
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
+        return;
       } else {
         let bmp280, dht11, ds18b20, openweather;
-        conn.query("SELECT * FROM bmp280 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
+        conn.query("SELECT * FROM bmp280 WHERE timestamp BETWEEN ? AND ?", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             bmp280 = {}
             bmp280[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM dht11 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
+        conn.query("SELECT * FROM dht11 WHERE timestamp BETWEEN ? AND ?", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             dht11 = {}
             dht11[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM ds18b20 WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
+        conn.query("SELECT * FROM ds18b20 WHERE timestamp BETWEEN ? AND ?", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             ds18b20 = {}
             ds18b20[fields[0].table] = rows
           }
         })
-        conn.query("SELECT * FROM openweather WHERE timestamp BETWEEN '?' AND '?'", [startDate, endDate], (err, rows, fields) => {
+        conn.query("SELECT * FROM openweather WHERE timestamp BETWEEN ? AND ?", [startDate, endDate], (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             openweather = {}
             openweather[fields[0].table] = rows
@@ -51,11 +56,13 @@ export const WeatherDataController = {
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
+        return;
       } else {
         let bmp280, dht11, ds18b20, openweather;
         conn.query("SELECT * FROM bmp280", (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             bmp280 = {}
             bmp280[fields[0].table] = rows
@@ -64,6 +71,7 @@ export const WeatherDataController = {
         conn.query("SELECT * FROM dht11", (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             dht11 = {}
             dht11[fields[0].table] = rows
@@ -72,6 +80,7 @@ export const WeatherDataController = {
         conn.query("SELECT * FROM ds18b20", (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             ds18b20 = {}
             ds18b20[fields[0].table] = rows
@@ -80,6 +89,7 @@ export const WeatherDataController = {
         conn.query("SELECT * FROM openweather", (err, rows, fields) => {
           if (err) {
             response.json(err)
+            return;
           } else {
             openweather = {}
             openweather[fields[0].table] = rows
