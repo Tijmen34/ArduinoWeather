@@ -99,7 +99,8 @@ export const WeatherDataController = {
       }
     })
   },
-  getCurrentWeather: function (response) {
+
+  getCurrentWeather: function(request, response) {
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
