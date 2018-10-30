@@ -3,6 +3,9 @@ import connection from '../databases/database'
 
 export const WeatherDataController = {
   getByDates: function(request, response) {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'GET');
+    response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     const startDate = request.params.startDate
     const endDate = request.params.endDate
     connection.getConnection((err, conn) => {
@@ -53,6 +56,9 @@ export const WeatherDataController = {
   },
 
   getAllData: function(request, response) {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'GET');
+    response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
@@ -101,6 +107,9 @@ export const WeatherDataController = {
   },
 
   getCurrentWeather: function(request, response) {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'GET');
+    response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     connection.getConnection((err, conn) => {
       if (err) {
         response.json(err);
