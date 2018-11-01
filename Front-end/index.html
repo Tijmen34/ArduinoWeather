@@ -15,133 +15,135 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-  <script src="js/main.js"></script>
   <script src="js/vue.js"></script>
+  <script src="js/main.js" defer></script>
 </head>
 
 <body>
   <h1 style="text-align: center;">WeatherStation Data Dashboard</h1>
 
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Live Weather Data
+    <div id="weather">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-heading-text">
+                Live Weather Data
+              </div>
             </div>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-sm-4 sensordata-column nopadding">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">DHT11</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="col-md-6 sensordata-column">
-                      <div class="sensordata-specific-title">Temperature</div>
-                      <div class="sensordata-specific-data">
-                        20 °C <i class="wi wi-day-sunny"></i>
-                      </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-4 sensordata-column nopadding">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">DHT11</h4>
                     </div>
-                    <div class="col-md-6">
-                      <div class="sensordata-specific-title">Humidity</div>
-                      <div class="sensordata-specific-data">
-                        50% <i class="wi wi-humidity"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-2 sensordata-column">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">DS18B20</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="col-md-12">
-                      <div class="sensordata-specific-title">Temperature</div>
-                      <div class="sensordata-specific-data">
-                        20 °C <i class="wi wi-day-sunny"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-header">
-                    <h4 class="card-title">BMP280</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-4 sensordata-column">
+                    <div class="card-body">
+                      <div class="col-md-6 sensordata-column">
                         <div class="sensordata-specific-title">Temperature</div>
                         <div class="sensordata-specific-data">
-                          20 °C <i class="wi wi-day-sunny"></i>
+                          <div> {{ bmp280.temperature }} &#176;C <i class="wi wi-day-sunny"></i></div>
                         </div>
                       </div>
-                      <div class="col-md-4 sensordata-column">
-                        <div class="sensordata-specific-title">Altitude</div>
+                      <div class="col-md-6">
+                        <div class="sensordata-specific-title">Humidity</div>
                         <div class="sensordata-specific-data">
-                          Velen altitude <i class="wi wi-sandstorm"></i>
+                          {{ dht11.humidity }}% <i class="wi wi-humidity"></i>
                         </div>
                       </div>
-                      <div class="col-md-4">
-                        <div class="sensordata-specific-title">Pressure</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 sensordata-column">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">DS18B20</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="col-md-12">
+                        <div class="sensordata-specific-title">Temperature</div>
                         <div class="sensordata-specific-data">
-                          Much pressure! <i class="wi wi-stars"></i>
+                          {{ ds18b20.temperature }} &#176;C <i class="wi wi-day-sunny"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">BMP280</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-4 sensordata-column">
+                          <div class="sensordata-specific-title">Temperature</div>
+                          <div class="sensordata-specific-data">
+                            {{ bmp280.temperature }} &#176;C <i class="wi wi-day-sunny"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4 sensordata-column">
+                          <div class="sensordata-specific-title">Altitude</div>
+                          <div class="sensordata-specific-data">
+                            {{ bmp280.altitude }} <i class="wi wi-sandstorm"></i>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="sensordata-specific-title">Pressure</div>
+                          <div class="sensordata-specific-data">
+                            {{ bmp280.pressure }} <i class="wi wi-stars"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row weatherdata-row">
-              <div class="col-sm-12">
-                Hier komt weerdata!
+              <div class="row weatherdata-row">
+                <div class="col-sm-12">
+                  Hier komt weerdata!
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Weekly Overview
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-heading-text">
+                Weekly Overview
+              </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
+            <div class="panel-body">
+              Pure troep!
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Monthly Overview
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-heading-text">
+                Monthly Overview
+              </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
+            <div class="panel-body">
+              Pure troep!
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-heading-text">
-              Custom Overview
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="panel-heading-text">
+                Custom Overview
+              </div>
             </div>
-          </div>
-          <div class="panel-body">
-            Pure troep!
+            <div class="panel-body">
+              Pure troep!
+            </div>
           </div>
         </div>
       </div>
