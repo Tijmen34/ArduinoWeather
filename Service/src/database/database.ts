@@ -1,5 +1,5 @@
 import * as mySQL from 'mysql'
-import { config } from '../configs/config'
+import { config } from '../config/config'
 
 const connection = mySQL.createPool({
   connectionLimit: 100,

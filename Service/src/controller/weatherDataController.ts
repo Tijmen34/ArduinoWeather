@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
-import connection from '../databases/database'
+import connection from '../database/database'
+import {BMP280} from "../model/BMP280";
+import {throws} from "assert";
 
 export const WeatherDataController = {
   getByDates: function(request, response) {
@@ -88,5 +90,18 @@ export const WeatherDataController = {
         })
       }
     })
-  }
-}
+  },
+    getExperimentalData: (request, response) => {
+      BMP280
+          .findAll({
+              limit: 1,
+              order: [ [ 'id', 'DESC' ] ]
+          })
+          .then((lottaData) => {
+            response.json({}["BMP280"] = lottaData[0])
+          })
+          .catch((err) => {
+            response.json(err)
+          })
+    }
+};

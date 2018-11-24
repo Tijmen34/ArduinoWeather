@@ -1,16 +1,15 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Routes } from "./routes/weatherDataRoutes";
+import { Routes } from "./router/router";
 
 class App {
 
     public app: express.Application;
-    public routeSensors: Routes = new Routes();
 
     constructor() {
         this.app = express();
         this.config();
-        this.routeSensors.routes(this.app);
+        Routes.routes(this.app);
     }
 
     private config(): void{
