@@ -6,6 +6,7 @@ import requests
 import mysql.connector
 import serial
 
+#Fill your database information in here.
 db = mysql.connector.connect(host="127.0.0.1",
                              user="",
                              password="",
@@ -14,7 +15,7 @@ db = mysql.connector.connect(host="127.0.0.1",
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
-request_params = {'q': '', 'APPID': ''}
+request_params = {'q': '', 'APPID': ''} #Add your own Openweather data here.
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
 
 
@@ -34,7 +35,7 @@ def insertSensorData(sensorJson, outerWeatherData):
             print("Failed to insert data into MySQL!")
             raise
         else:
-            print("Completed insert (without OpenWeather) at", time.strftime(format))
+            print("Completed insert (without OpenWeather) at", datetime.datetime.now())
 
     else:
         try:
