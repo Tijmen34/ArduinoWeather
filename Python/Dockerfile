@@ -1,7 +1,7 @@
-FROM python:3
+FROM python:3-slim
 
 ADD ArduinoToMySQL.py /
 
 RUN pip install pyserial mysql-connector-python requests
 
-CMD ["python", "./ArduinoToMySQL.py"]
+CMD ["python", "-u", "./ArduinoToMySQL.py"]
