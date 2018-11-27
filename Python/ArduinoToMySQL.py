@@ -54,7 +54,7 @@ def insertSensorData(sensorJson, outerWeatherData):
             print("Failed to insert data into MySQL!")
             raise
         else:
-            print("Completed insert at", time.strftime(format))
+            print("Completed insert at", datetime.datetime.now())
 
 
 def retrieveSerialData(serial):
@@ -77,8 +77,19 @@ while True:
     else:
         try:
             request = requests.get(openweather_url, params=request_params)
+            request.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            print("Failed to perform the HTTP request with error: ", e)
+            try:
+                insertSensorData(jsonData)
+            except mysql.connector.Error as e:
+                print(e)
         except requests.exceptions.RequestException as e:
-            print("Failed to perform HTTP request with error: ", e)
+            print("Something went wrong... ", e)
+            try:
+                insertSensorData(jsonData, requestData)
+            except mysql.connector.Error as e:
+                print(e)
         else:
             requestData = request.json()
             try:
