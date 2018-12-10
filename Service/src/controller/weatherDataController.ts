@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import connection from '../database/database'
-import {BMP280} from "../model/BMP280";
-import {throws} from "assert";
+import { BMP280 } from "../model/BMP280";
+import { Openweather } from "../model/Openweather";
+import { DHT11 } from "../model/DHT11";
+import { DS18B20 } from "../model/DS18B20";
+import { throws } from "assert";
 
 export const WeatherDataController = {
   getByDates: function(request, response) {
@@ -158,17 +161,81 @@ export const WeatherDataController = {
       }
     })
   },
-    getExperimentalData: (request, response) => {
-      BMP280
-          .findAll({
-              limit: 1,
-              order: [ [ 'id', 'DESC' ] ]
-          })
-          .then((lottaData) => {
-            response.json({}["BMP280"] = lottaData[0])
-          })
-          .catch((err) => {
-            response.json(err)
-          })
-    }
+
+  getCurrentWeather2: (request, response) => {
+    const startDate = request.params.startDate;
+    const endDate = request.params.endDate;
+
+    const bmp280Promise = BMP280.findAll({
+      where: {
+        timestamp: {
+          $between: [startDate, endDate]
+        }
+      }
+    })
+
+    const dht11Promise = DHT11.findAll({
+      where: {
+        timestamp: {
+          $between: [startDate, endDate]
+        }
+      }
+    })
+
+    const openweatherPromise = Openweather.findAll({
+      where: {
+        timestamp: {
+          $between: [startDate, endDate]
+        }
+      }
+    })
+
+    const ds18b20Promise = DS18B20.findAll({
+      where: {
+        timestamp: {
+          $between: [startDate, endDate]
+        }
+      }
+    })
+
+    Promise.all([
+      bmp280Promise,
+      dht11Promise,
+      openweatherPromise,
+      ds18b20Promise])
+      .then(sqlResults => {
+        response.json(sqlResults)
+      })
+      .catch(err => {
+        response.status(500).json({ error: err });
+      })
+
+    // const bmp280Promise = BMP280.findAll({
+    //   where: {
+    //     timestamp: {
+    //       $between: [startDate, endDate]
+    //     }
+    //   }
+    // })
+    //   .then((bmp280Rows) => {
+    //       response.json(bmp280Rows)
+    //   })
+    //   .catch((err) => {
+    //     response.status(500).json({ error: err });
+    //   })
+  },
+
+  getExperimentalData: (request, response) => {
+    BMP280
+      .findAll({
+        limit: 1,
+        order: [['id', 'DESC']]
+      })
+      .then((lottaData) => {
+        response.json({}["BMP280"] = lottaData[0])
+      })
+      .catch((err) => {
+        response.json(err)
+      })
+  }
 };
