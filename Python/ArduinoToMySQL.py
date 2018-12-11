@@ -6,16 +6,21 @@ import requests
 import mysql.connector
 import serial
 
+#Import config file
+with open('config.json') as json:
+    configData = json.load(json)
+
+
 #Fill your database information in here.
-db = mysql.connector.connect(host="127.0.0.1",
-                             user="",
-                             password="",
-                             db="internetofthings")
+db = mysql.connector.connect(host=configData["database"]["host"],
+                             user=configData["database"]["user"],
+                             password=configData["database"]["password"],
+                             db=configData["database"]["database"])
 
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
-request_params = {'q': '', 'APPID': ''} #Add your own Openweather data here.
+request_params = {'q': configData["openweather"]["location"], 'APPID': configData["openweather"]["token"]} #Add your own Openweather data here.
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
 
 

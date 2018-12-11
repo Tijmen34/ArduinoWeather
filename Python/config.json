@@ -1,0 +1,12 @@
+{
+  "database": {
+    "host" : "",
+    "user": "",
+    "password": "",
+    "database": ""
+  },
+  "openweathermap": {
+    "location": "",
+    "token": ""
+  }
+}
