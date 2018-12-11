@@ -87,13 +87,13 @@ while True:
         except requests.exceptions.HTTPError as e:
             print("Failed to perform the HTTP request with error: ", e)
             try:
-                insertSensorData(jsonData)
+                insertSensorData(jsonData, None)
             except mysql.connector.Error as e:
                 print(e)
         except requests.exceptions.RequestException as e:
             print("Something went wrong... ", e)
             try:
-                insertSensorData(jsonData, requestData)
+                insertSensorData(jsonData, None)
             except mysql.connector.Error as e:
                 print(e)
         else:
