@@ -23,12 +23,12 @@ def insertSensorData(sensorJson, outerWeatherData):
     cursor = db.cursor()
     if outerWeatherData is None:
         try:
-            cursor.execute("INSERT INTO bmp280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
+            cursor.execute("INSERT INTO BMP280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
                            (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["altitude"],
                             sensorJson["bmp280"]["pressure"]))
-            cursor.execute("INSERT INTO dht11 (temperature, humidity) VALUES (%s, %s)",
+            cursor.execute("INSERT INTO DHT11 (temperature, humidity) VALUES (%s, %s)",
                            (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
-            cursor.execute("INSERT INTO ds18b20 (temperature) VALUES (%s)",
+            cursor.execute("INSERT INTO DS18B20 (temperature) VALUES (%s)",
                            (("{:.2f}".format(sensorJson["ds18b20"])),))
             db.commit()
         except mysql.connector.Error:
@@ -39,14 +39,14 @@ def insertSensorData(sensorJson, outerWeatherData):
 
     else:
         try:
-            cursor.execute("INSERT INTO bmp280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
+            cursor.execute("INSERT INTO BMP280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
                            (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["altitude"],
                             sensorJson["bmp280"]["pressure"]))
-            cursor.execute("INSERT INTO dht11 (temperature, humidity) VALUES (%s, %s)",
+            cursor.execute("INSERT INTO DHT11 (temperature, humidity) VALUES (%s, %s)",
                            (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
-            cursor.execute("INSERT INTO ds18b20 (temperature) VALUES (%s)",
+            cursor.execute("INSERT INTO DS18B20 (temperature) VALUES (%s)",
                            (("{:.2f}".format(sensorJson["ds18b20"])),))
-            cursor.execute("INSERT INTO openweather (temperature, pressure, humidity) VALUES (%s, %s, %s)",
+            cursor.execute("INSERT INTO Openweather (temperature, pressure, humidity) VALUES (%s, %s, %s)",
                            (("{:.2f}".format(outerWeatherData["main"]["temp"] - 273.15)),
                             outerWeatherData["main"]["pressure"],
                             outerWeatherData["main"]["humidity"]))
