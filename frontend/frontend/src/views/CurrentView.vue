@@ -19,8 +19,8 @@
             </div>
           </div>
         </div>
-        <div class="card-footer text-muted">
-          Krommenie, 03-01-2018 17:50:00
+        <div v-if="bmp280" class="card-footer text-muted">
+          Krommenie, {{ bmp280.date }}
         </div>
       </div>
     </div>
@@ -36,13 +36,16 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-4">
-                  Temperature
+                  <h5 class="card-title house-temperature">Temperature</h5>
+                  <p v-if="bmp280" class="card-text">{{bmp280.temperature}} &deg;</p>
                 </div>
                 <div class="col-4">
-                  Pressure
+                  <h5 class="card-title house-temperature">Pressure</h5>
+                  <p v-if="bmp280" class="card-text">{{bmp280.pressure}}</p>
                 </div>
                 <div class="col-4">
-                  Altitude
+                  <h5 class="card-title house-temperature">Altitude</h5>
+                  <p v-if="bmp280" class="card-text">{{bmp280.altitude}}</p>
                 </div>
               </div>
             </div>
@@ -58,10 +61,12 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                  Temperature
+                  <h5 class="card-title house-temperature">Temperature</h5>
+                  <p v-if="dht11" class="card-text">{{dht11.temperature}} &deg;</p>
                 </div>
                 <div class="col-6">
-                  Humidity
+                  <h5 class="card-title house-temperature">Humidity</h5>
+                  <p v-if="dht11" class="card-text">{{dht11.humidity}}</p>
                 </div>
               </div>
             </div>
@@ -75,7 +80,8 @@
               </h6>
             </div>
             <div class="card-body">
-              Temperature
+              <h5 class="card-title house-temperature">Temperature</h5>
+              <p v-if="ds18b20" class="card-text">{{ds18b20.temperature}} &deg;</p>
             </div>
           </div>
         </div>
@@ -89,13 +95,16 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-4">
-                  Temperature
+                  <h5 class="card-title house-temperature">Temperature</h5>
+                  <p v-if="openweather" class="card-text">{{openweather.temperature}} &deg;</p>
                 </div>
                 <div class="col-4">
-                  Pressure
+                  <h5 class="card-title house-temperature">Pressure</h5>
+                  <p v-if="openweather" class="card-text">{{openweather.pressure}}</p>
                 </div>
                 <div class="col-4">
-                  Humidity
+                  <h5 class="card-title house-temperature">Humidity</h5>
+                  <p v-if="openweather" class="card-text">{{openweather.humidity}}</p>
                 </div>
               </div>
             </div>
@@ -113,20 +122,24 @@ export default {
   name: 'CurrentView',
   data () {
     return {
-      bmp280: [],
-      dht11: [],
-      ds18b20: [],
-      Openweather: []
+      bmp280: null,
+      dht11: null,
+      ds18b20: null,
+      openweather: null
     }
   },
   created () {
     this.getCurrentWeather();
   },
   methods: {
-    getCurrentWeather: () => {
+    getCurrentWeather: function () {
       axios.get("http://192.168.1.36:3000/api/weather/now")
-      .then(resp => {
-        console.log(resp.data)
+      .then((resp) => {
+        this.bmp280 = resp.data.BMP280[0]
+        this.dht11 = resp.data.DHT11[0]
+        this.ds18b20 = resp.data.DS18B20[0]
+        this.openweather = resp.data.Openweather[0]
+        console.log("Request done.")
       })
       .catch(err => {
         console.log(err);
@@ -171,22 +184,22 @@ export default {
     font-size: 16px;
   }
 
-  #current-average-body .card-footer {
+  #current-average .card-footer {
     font-size: 10px;
   }
 }
 
 @media (max-width: 420px) {
-  #current-average-body .card-text {
-    font-size: 12px;
+   .card-text {
+    font-size: 13px;
   }
 
-  #current-average-body .card-title {
+   .card-title {
     font-size: 14px;
   }
 
-  #current-average-body .card-footer {
-    font-size: 9px;
+  #current-average .card-footer {
+    font-size: 12px;
   }
 }
 </style>
