@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
-import Home from './views/Home.vue'
+import CurrentView from './views/CurrentView.vue'
 
 Vue.use(Router)
 Vue.use(BootstrapVue)
@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: CurrentView
     },
     {
       path: '/about',

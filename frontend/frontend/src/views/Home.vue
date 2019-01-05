@@ -1,16 +1,9 @@
-<!-- <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template> -->
-
 <template>
 <div id="home">
   <div id="topheader">
     <HeaderNavBar />
     <div class="image-container">
-      <img class="background-image" src="../assets/image/long-boye6.jpg">
+      <img class="background-image" src="../assets/image/long-boye7.jpg">
       <h2> Arduino &amp; Raspberry Pi Weather Station </h2>
     </div>
     <div class="container-fluid" id="bananentering">
@@ -21,23 +14,24 @@
       </div>
     </div>
   </div>
-  <CurrentView/>
-    <!-- <HelloWorld msg="Welcome to my amazing WeatherStation website!" /> -->
+  <router-view></router-view>
+  <Footer />
 </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import HeaderNavBar from '@/components/HeaderNavBar.vue'
 import CurrentView from '@/views/CurrentView.vue'
+import GraphView from '@/views/GraphView.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'home',
   components: {
-    // HelloWorld,
     HeaderNavBar,
-    CurrentView
+    CurrentView,
+    GraphView,
+    Footer
   }
 }
 </script>
@@ -65,8 +59,9 @@ export default {
   text-shadow: 1px 1px 1px black;
   position: absolute;
   top: 50%;
-  left:  50%;
-  -webkit-transform: translate(-50%, -50%); /* iOS */
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  /* iOS */
   transform: translate(-50%, -50%);
 }
 
