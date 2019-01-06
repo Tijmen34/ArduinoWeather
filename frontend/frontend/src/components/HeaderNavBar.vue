@@ -16,11 +16,11 @@
             <a class="nav-link" data-toggle="collapse" data-target="#screen-collapse">Graph</a>
           </router-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <router-link to="/average">
             <a class="nav-link" data-toggle="collapse" data-target="#screen-collapse">Average</a>
           </router-link>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>

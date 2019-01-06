@@ -17,12 +17,12 @@ export default new Router({
       path: '/graph',
       name: 'graph',
       component: () => import('./views/GraphView.vue')
-    },
-    {
-      path: '/average',
-      name: 'average',
-      component: () => import('./views/AverageView.vue')
     }
+    // {
+    //   path: '/average',
+    //   name: 'average',
+    //   component: () => import('./views/AverageView.vue')
+    // }
     // {
     //   path: '*',
     //   name: '404',
