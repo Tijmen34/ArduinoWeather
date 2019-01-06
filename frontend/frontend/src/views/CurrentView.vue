@@ -11,11 +11,11 @@
           <div class="row">
             <div class="col-6">
               <h6 class="card-title house-temperature-average">Inside</h6>
-              <p v-if="insideAverage" class="card-text">{{ insideAverage }} &deg;</p>
+              <p v-if="insideAverage" class="card-text">{{ insideAverage }} C&deg;</p>
             </div>
             <div class="col-6">
               <h6 class="card-title outside-temperature">Outside</h6>
-              <p v-if="openweather" class="card-text">{{ openweather.temperature }} &deg;</p>
+              <p v-if="openweather" class="card-text">{{ openweather.temperature }} C&deg;</p>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
                     <div class="col-4">
                       <h6 class="card-title house-temperature">Temperature</h6>
                       <h6 class="card-title house-temperature-mobile">Temp.</h6>
-                      <p v-if="bmp280" class="card-text">{{bmp280.temperature}} &deg;</p>
+                      <p v-if="bmp280" class="card-text">{{bmp280.temperature}} C&deg;</p>
                     </div>
                     <div class="col-4">
                       <h6 class="card-title house-pressure">Pressure</h6>
@@ -66,11 +66,11 @@
                     <div class="col-6">
                       <h6 class="card-title house-temperature">Temperature</h6>
                       <h6 class="card-title house-temperature-mobile">Temp.</h6>
-                      <p v-if="dht11" class="card-text">{{dht11.temperature}} &deg;</p>
+                      <p v-if="dht11" class="card-text">{{dht11.temperature}} C&deg;</p>
                     </div>
                     <div class="col-6">
                       <h6 class="card-title house-humidity">Humidity</h6>
-                      <p v-if="dht11" class="card-text">{{dht11.humidity}}</p>
+                      <p v-if="dht11" class="card-text">{{dht11.humidity}}%</p>
                     </div>
                   </div>
                 </div>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="card-body">
                   <h6 class="card-title house-temperature-ds18b20">Temperature</h6>
-                  <p v-if="ds18b20" class="card-text">{{ds18b20.temperature}} &deg;</p>
+                  <p v-if="ds18b20" class="card-text">{{ds18b20.temperature}} C&deg;</p>
                 </div>
               </div>
             </div>
@@ -105,7 +105,7 @@
                     <div class="col-4">
                       <h6 class="card-title house-temperature">Temperature</h6>
                       <h6 class="card-title house-temperature-mobile">Temp.</h6>
-                      <p v-if="openweather" class="card-text">{{openweather.temperature}} &deg;</p>
+                      <p v-if="openweather" class="card-text">{{openweather.temperature}} C&deg;</p>
                     </div>
                     <div class="col-4">
                       <h6 class="card-title house-pressure">Pressure</h6>
@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-4">
                       <h6 class="card-title house-humidity">Humidity</h6>
-                      <p v-if="openweather" class="card-text">{{openweather.humidity}}</p>
+                      <p v-if="openweather" class="card-text">{{openweather.humidity}}%</p>
                     </div>
                   </div>
                 </div>
@@ -163,11 +163,6 @@ export default {
 </script>
 
 <style>
-.card-footer {
-  padding-top: 6px;
-  padding-bottom: 3px;
-}
-
 .house-temperature-mobile {
   display: none;
 }
