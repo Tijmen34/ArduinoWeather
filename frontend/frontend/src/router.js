@@ -10,13 +10,31 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: CurrentView
+      redirect: {
+        name: 'login'
+      }
     },
     {
-      path: '/graph',
-      name: 'graph',
-      component: () => import('./views/GraphView.vue')
+      path: '/login',
+      name: 'login',
+      component: () => import('./views/LoginView.vue')
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('./views/Home.vue'),
+      children: [
+        {
+          path: "graphs",
+          name: "graphs",
+          component: () => import('./views/GraphView.vue')
+        },
+        {
+          path: "current",
+          name: "current",
+          component: () => import('./views/CurrentView.vue')
+        }
+      ]
     }
     // {
     //   path: '/average',

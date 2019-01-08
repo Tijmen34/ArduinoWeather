@@ -1,16 +1,33 @@
 <template>
   <div id="app">
-    <Home />
+    <router-view @authenticated="setAuthenticated"/>
   </div>
 </template>
-
 <script>
-import Home from '@/views/Home.vue'
 
 export default {
   name: 'app',
-  components: {
-    Home
+  data() {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: "tijmen",
+        password: "admin"
+      }
+    }
+  },
+  mounted() {
+    if(!this.authenticated) {
+      this.$router.push({name: "login"})
+    }
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
+    },
+    logout() {
+      this.authenticated = false;
+    }
   }
 }
 </script>

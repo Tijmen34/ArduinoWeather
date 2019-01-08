@@ -37,6 +37,9 @@ export default {
 </script>
 
 <style>
+body {
+  background: white;
+}
 .background-image {
   max-width: 100%;
   height: auto;

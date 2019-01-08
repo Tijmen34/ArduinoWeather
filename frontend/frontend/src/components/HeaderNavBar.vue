@@ -7,12 +7,12 @@
     <div class="navbar-collapse collapse" id="screen-collapse">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <router-link to="/">
+          <router-link to="/home/current">
             <a class="nav-link" data-toggle="collapse" data-target="#screen-collapse">Home</a>
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/graph">
+          <router-link to="/home/graphs">
             <a class="nav-link" data-toggle="collapse" data-target="#screen-collapse">Graph</a>
           </router-link>
         </li>
