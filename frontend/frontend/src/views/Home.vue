@@ -7,10 +7,10 @@
       <h2> Arduino &amp; Raspberry Pi Weather Station </h2>
     </div>
     <div class="container-fluid" id="bananentering">
-      <div class="p-3 mb-2 bg-light text-dark">
-        Welcome to <b>ArduinoWeather</b>, a simple website showcasing some awesome fucking data. <br>
-        You will be able to see the temperature in my house, as well as outside my house. <br>
-        Amazing right.
+      <div class="p-3 mb-2 bg-light text-dark" id="welcome-text">
+        Welcome to <b>ArduinoWeather</b>, a small website showcasing IoT data. <br>
+        The data consists of weather inside my home from multiple sensors, as well as temperature from an external API.<br>
+        I used the BMP280, DHT11 and DS18B20 sensor to measure temperature, humidity, pressure et cetera.
       </div>
     </div>
   </div>
@@ -106,7 +106,10 @@ body {
 @media (max-width: 480px) {
   .image-container h2 {
     font-size: 16px;
+  }
 
+  #welcome-text {
+    font-size: 15px;
   }
 
 }
