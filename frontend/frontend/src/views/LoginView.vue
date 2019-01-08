@@ -15,7 +15,7 @@
           <input type="password" class="form-control" v-model="input.password" name="password" placeholder="password" required>
         </div>
         <div class="form-group">
-          <button type="button"class="btn btn-primary float-right" v-on:click="login()">Login</button>
+          <button type="button" class="btn btn-primary float-right" v-on:click="login()">Login</button>
         </div>
       </form>
     </div>

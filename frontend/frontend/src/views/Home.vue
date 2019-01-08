@@ -21,16 +21,12 @@
 
 <script>
 import HeaderNavBar from '@/components/HeaderNavBar.vue'
-import CurrentView from '@/views/CurrentView.vue'
-import GraphView from '@/views/GraphView.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
   name: 'home',
   components: {
     HeaderNavBar,
-    CurrentView,
-    GraphView,
     Footer
   }
 }
