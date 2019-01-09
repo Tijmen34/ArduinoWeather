@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     getAllWeather: function () {
-      axios.get("http://192.168.1.36:3000/api/weather/all")
+      axios.get("http://rienstor.no-ip.org:3000/api/weather/all")
       .then((resp) => {
         this.bmp280 = resp.data.BMP280
         this.dht11 = resp.data.DHT11

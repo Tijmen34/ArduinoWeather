@@ -50,7 +50,7 @@ export default {
       document.getElementById('signupFullfilled').style.display = "none";
 
       if (this.input.username != "" && this.input.password != "") {
-        axios.post("http://192.168.1.36:3000/api/user/login", {
+        axios.post("http://rienstor.no-ip.org:3000/api/user/login", {
             username: this.input.username,
             password: this.input.password
           })
@@ -74,7 +74,7 @@ export default {
       document.getElementById('signupFullfilled').style.display = "none";
 
       if (this.input.username != "" && this.input.password != "") {
-        axios.post("http://192.168.1.36:3000/api/user/signup", {
+        axios.post("http://rienstor.no-ip.org:3000/api/user/signup", {
             username: this.input.username,
             password: this.input.password
           })
