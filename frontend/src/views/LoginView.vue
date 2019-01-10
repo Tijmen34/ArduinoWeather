@@ -61,7 +61,7 @@ export default {
             });
           })
           .catch(err => {
-            this.statusMessage = err.message
+            this.statusMessage = err.response.data.message
             document.getElementById('errorLogin').style.display = "block";
           })
       } else {
@@ -83,7 +83,7 @@ export default {
             document.getElementById('signupFullfilled').style.display = "block";
           })
           .catch(err => {
-            this.statusMessage = err.message
+            this.statusMessage = err.response.data.message
             document.getElementById('errorLogin').style.display = "block";
           })
       } else {
@@ -97,7 +97,6 @@ export default {
 
 <style>
 body {
-  background: url('../assets/image/cloudy-garbage.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
