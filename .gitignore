@@ -321,3 +321,5 @@ typings/
 .serverless
 
 # End of https://www.gitignore.io/api/java,python,java-web,intellij+all
+
+python-script/config.json
