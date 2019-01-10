@@ -2,7 +2,7 @@
 
 ## WeatherStation for the Arduino and Raspberry Pi
 
-The Weatherstaion is a project by Tijmen Stor, created for two courses at the Amsterdam University of Applied Sciences.
+The Weatherstation is a project by Tijmen Stor, created for two courses at the Amsterdam University of Applied Sciences.
 The project is IoT (Internet of Things) based, having a sensor measure temperature et cetera in my home.
 
 ### The project contains the following folders
@@ -14,3 +14,7 @@ The project is IoT (Internet of Things) based, having a sensor measure temperatu
 	* Contains the frontend that displays the data from the API.
 * python-script
 	* Contains a script that saves the data from the Arduino into a database.
+
+Each of these folders contains their own respective information on what the folder exactly exists of and how to run it.
+The following diagram shows the structure of this project as I had created it:
+![Alt](system-architecture.png "System Architecture")
