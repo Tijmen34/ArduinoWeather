@@ -25,7 +25,7 @@ docker build -t {PREFFERED_TAG_NAME} .
 
 Run the built image.
 ```
-docker run -d --network=host --device=/dev/ttyUSB0 {IMAGE_NAME}
+docker run -d --network=host --device=/dev/ttyUSB0 --name={DOCKER_CONTAINER_NAME} {IMAGE_NAME}
 ```
 
 Beware, the device in this script might have to be changed. ttyUSB0 was the port that my Raspberry Pi used.
