@@ -4,4 +4,8 @@ This code was created to be ran on an Arduino with three sensors connected to it
 * GY-BME280
 * DS18B20
 
-This code should be ran with the Arduino IDE. The Adafruit DHT library is the only library that has to be downloaded.
+This code should be ran with the Arduino IDE. The code needs a couple of libraries to work
+* OneWire
+* DallasTemperature
+* Adafruit BMP280
+* Adafruit DHT
