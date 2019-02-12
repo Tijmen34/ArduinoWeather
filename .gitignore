@@ -322,4 +322,6 @@ typings/
 
 # End of https://www.gitignore.io/api/java,python,java-web,intellij+all
 
+backend/.env
+
 python-script/config.json
