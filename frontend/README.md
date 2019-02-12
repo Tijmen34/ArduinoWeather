@@ -1,29 +1,34 @@
-# frontend
+## ArduinoWeather Frontend
+This folder contains the frontend for the ArduinoWeather project.
+
+The frontend makes use of Node.js and NPM as package manager, using Vue as the application framework.
+The application makes use of a backend hosted at http://rienstor.no-ip.org:3000/. If this service is not reachable, please run the backend locally on your machine and point the URLs to your localhost.
 
 ## Project setup
+Node.js and NPM have to be installed on the machine.  
+  
+First install all the dependencies and http-server for production with NPM
 ```
-npm install
+npm install && npm install http-server
 ```
 
-### Compiles and hot-reloads for development
+Run the frontend locally with hot-reload on port 8080
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+Run the frontend for production
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+npm run prod
 ```
 
-### Lints and fixes files
+### Docker
+Dockerize this!
 ```
-npm run lint
+docker build -t {PREFERRED_TAG_NAME} .
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Run the image
+```
+docker run -d -p 8080:8080 --name={DOCKER_CONTAINER_NAME} {IMAGE_NAME}
+```
