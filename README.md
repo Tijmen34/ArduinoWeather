@@ -8,12 +8,10 @@ The project is IoT (Internet of Things) based, having a sensor measure temperatu
 ### The project contains the following folders
 * arduino-code
 	* Contains the code to be deployed on the Arduino.
-* backend
-	* Contains the backend that serves the data from the database.
-* frontend
-	* Contains the frontend that displays the data from the API.
 * python-script
 	* Contains a script that saves the data from the Arduino into a database.
+
+The frontend and backend of this project have their own repositories for easier CI/CD pipelining. :)
 
 Each of these folders contains their own respective information on what the folder exactly exists of and how to run it.
 The following diagram shows the structure of this project as I had created it:
