@@ -13,8 +13,8 @@ with open('config.json') as configJson:
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
-openweather_request_params = {'q': configData['openweather']['location'],
-                  'APPID': configData['openweather']['token']}
+openweather_request_params = {'q': configData['openweathermap']['location'],
+                  'APPID': configData['openweathermap']['token']}
 
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
 

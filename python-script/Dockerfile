@@ -1,6 +1,6 @@
 FROM python:3-slim
 
-ADD ArduinoToMySQL.py /
+ADD DataToAPI.py /
 
 RUN pip install pyserial requests
 
