@@ -65,7 +65,7 @@ def postSensorData(sensorJson, outerWeatherData):
                     'humidity': sensorJson["dht11"]["humidity"]
                 },
                 'DS18B20': {
-                    'temperature': sensorJson["ds18b20"]["temperature"]
+                    'temperature': sensorJson["ds18b20"]
                 },
                 'Openweather': {
                     'temperature': outerWeatherData["main"]["temperature"],
