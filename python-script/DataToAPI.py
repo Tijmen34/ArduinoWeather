@@ -3,7 +3,6 @@ import json
 import time
 
 import requests
-
 import serial
 
 # Import config file
@@ -13,16 +12,15 @@ with open('config.json') as configJson:
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
+# Create Openweathermap request parameters, containing the location and API token
 openweather_request_params = {'q': configData['openweathermap']['location'],
                   'APPID': configData['openweathermap']['token']}
 
+# Define URLs to call
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
-
-backend_request_params = {}
-
 backend_url = configData['backend-url']
 
-
+# Function that posts the sensor + openweathermap data
 def postSensorData(sensorJson, outerWeatherData):
     if outerWeatherData is None:
         try:
@@ -41,7 +39,7 @@ def postSensorData(sensorJson, outerWeatherData):
                 }
             }
 
-            backend_request = requests.post(backend_url, params=params_without_openweather)
+            backend_request = requests.post(backend_url, json=params_without_openweather)
             backend_request.raise_for_status()
         except requests.exceptions.HTTPError:
             print("Failed to perform the HTTP request to the backend!")
@@ -74,7 +72,7 @@ def postSensorData(sensorJson, outerWeatherData):
                 }
             }
 
-            backend_request = requests.post(backend_url, params=params_with_openweather)
+            backend_request = requests.post(backend_url, json=params_with_openweather)
             backend_request.raise_for_status()
         except requests.exceptions.HTTPError:
             print("Failed to perform the HTTP request to the backend!")
@@ -85,7 +83,7 @@ def postSensorData(sensorJson, outerWeatherData):
         else:
             print("Completed post at", datetime.datetime.now())
 
-
+# Function to retrieve serial data
 def retrieveSerialData(serial):
     try:
         serial_output = ser.readline()
@@ -96,6 +94,7 @@ def retrieveSerialData(serial):
         return json.loads(serial_output_decoded)
 
 
+# Continuous loop to check the serial port for data.
 while True:
     try:
         jsonData = retrieveSerialData(ser)
