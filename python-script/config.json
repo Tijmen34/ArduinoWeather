@@ -1,10 +1,5 @@
 {
-  "database": {
-    "host" : "",
-    "user": "",
-    "password": "",
-    "database": ""
-  },
+  "backend-url": "",
   "openweathermap": {
     "location": "",
     "token": ""

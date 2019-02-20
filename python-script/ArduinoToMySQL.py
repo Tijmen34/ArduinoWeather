@@ -3,64 +3,87 @@ import json
 import time
 
 import requests
-import mysql.connector
+
 import serial
 
-#Import config file
+# Import config file
 with open('config.json') as configJson:
     configData = json.load(configJson)
-
-
-#Fill your database information in here.
-db = mysql.connector.connect(host=configData['database']['host'],
-                             user=configData['database']['user'],
-                             password=configData['database']['password'],
-                             db=configData['database']['database'])
 
 ser = serial.Serial('/dev/ttyUSB0', 9600)
 time.sleep(0.5)
 
-request_params = {'q': configData['openweather']['location'], 'APPID': configData['openweather']['token']} #Add your own Openweather data here.
+openweather_request_params = {'q': configData['openweather']['location'],
+                  'APPID': configData['openweather']['token']}
+
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
 
+backend_request_params = {}
 
-def insertSensorData(sensorJson, outerWeatherData):
-    cursor = db.cursor()
+backend_url = configData['backend-url']
+
+
+def postSensorData(sensorJson, outerWeatherData):
     if outerWeatherData is None:
         try:
-            cursor.execute("INSERT INTO BMP280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
-                           (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["altitude"],
-                            sensorJson["bmp280"]["pressure"]))
-            cursor.execute("INSERT INTO DHT11 (temperature, humidity) VALUES (%s, %s)",
-                           (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
-            cursor.execute("INSERT INTO DS18B20 (temperature) VALUES (%s)",
-                           (("{:.2f}".format(sensorJson["ds18b20"])),))
-            db.commit()
-        except mysql.connector.Error:
-            print("Failed to insert data into MySQL!")
+            params_without_openweather = {
+                'BMP280' : {
+                    'temperature' : sensorJson["bmp280"]["temperature"],
+                    'altitude': sensorJson["bmp280"]["altitude"],
+                    'pressure': sensorJson["bmp280"]["pressure"]
+                },
+                'DHT11': {
+                    'temperature': sensorJson["dht11"]["temperature"],
+                    'humidity': sensorJson["dht11"]["humidity"]
+                },
+                'DS18B20': {
+                    'temperature': sensorJson["ds18b20"]["temperature"]
+                }
+            }
+
+            backend_request = requests.post(backend_url, params=params_without_openweather)
+            backend_request.raise_for_status()
+        except requests.exceptions.HTTPError:
+            print("Failed to perform the HTTP request to the backend!")
+            raise
+        except requests.exceptions.RequestException:
+            print("Something went wrong during backend request...")
             raise
         else:
-            print("Completed insert (without OpenWeather) at", datetime.datetime.now())
+            print("Completed post (without OpenWeather) at", datetime.datetime.now())
 
     else:
         try:
-            cursor.execute("INSERT INTO BMP280 (temperature, altitude, pressure) VALUES (%s, %s, %s)",
-                           (sensorJson["bmp280"]["temperature"], sensorJson["bmp280"]["altitude"],
-                            sensorJson["bmp280"]["pressure"]))
-            cursor.execute("INSERT INTO DHT11 (temperature, humidity) VALUES (%s, %s)",
-                           (sensorJson["dht11"]["temperature"], sensorJson["dht11"]["humidity"]))
-            cursor.execute("INSERT INTO DS18B20 (temperature) VALUES (%s)",
-                           (("{:.2f}".format(sensorJson["ds18b20"])),))
-            cursor.execute("INSERT INTO Openweather (temperature, pressure, humidity) VALUES (%s, %s, %s)",
-                           (("{:.2f}".format(outerWeatherData["main"]["temp"] - 273.15)),
-                            outerWeatherData["main"]["pressure"],
-                            outerWeatherData["main"]["humidity"]))
-            db.commit()
-        except mysql.connector.Error:
-            print("Failed to insert data into MySQL!")
+            params_with_openweather = {
+                'BMP280': {
+                    'temperature': sensorJson["bmp280"]["temperature"],
+                    'altitude': sensorJson["bmp280"]["altitude"],
+                    'pressure': sensorJson["bmp280"]["pressure"]
+                },
+                'DHT11': {
+                    'temperature': sensorJson["dht11"]["temperature"],
+                    'humidity': sensorJson["dht11"]["humidity"]
+                },
+                'DS18B20': {
+                    'temperature': sensorJson["ds18b20"]["temperature"]
+                },
+                'Openweather': {
+                    'temperature': outerWeatherData["main"]["temperature"],
+                    'humidity': outerWeatherData["main"]["humidity"],
+                    'pressure': outerWeatherData["main"]["pressure"]
+                }
+            }
+
+            backend_request = requests.post(backend_url, params=params_with_openweather)
+            backend_request.raise_for_status()
+        except requests.exceptions.HTTPError:
+            print("Failed to perform the HTTP request to the backend!")
+            raise
+        except requests.exceptions.RequestException:
+            print("Something went wrong during backend request...")
             raise
         else:
-            print("Completed insert at", datetime.datetime.now())
+            print("Completed post at", datetime.datetime.now())
 
 
 def retrieveSerialData(serial):
@@ -82,23 +105,29 @@ while True:
         print("Failed to find USB with error: ", e)  # In case of no USB found
     else:
         try:
-            request = requests.get(openweather_url, params=request_params)
+            request = requests.get(openweather_url, params=openweather_request_params)
             request.raise_for_status()
         except requests.exceptions.HTTPError as e:
-            print("Failed to perform the HTTP request with error: ", e)
+            print("Failed to perform the Openweathermap HTTP request with error: ", e)
             try:
-                insertSensorData(jsonData, None)
-            except mysql.connector.Error as e:
+                postSensorData(jsonData, None)
+            except requests.exceptions.HTTPError as e:
+                print(e)
+            except requests.exceptions.RequestException as e:
                 print(e)
         except requests.exceptions.RequestException as e:
             print("Something went wrong... ", e)
             try:
-                insertSensorData(jsonData, None)
-            except mysql.connector.Error as e:
+                postSensorData(jsonData, None)
+            except requests.exceptions.HTTPError as e:
+                print(e)
+            except requests.exceptions.RequestException as e:
                 print(e)
         else:
             requestData = request.json()
             try:
-                insertSensorData(jsonData, requestData)
-            except mysql.connector.Error as e:
+                postSensorData(jsonData, requestData)
+            except requests.exceptions.HTTPError as e:
+                print(e)
+            except requests.exceptions.RequestException as e:
                 print(e)
