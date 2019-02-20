@@ -1,20 +1,20 @@
 ## ArduinoWeather Python Script
-This script was created to receive the data from the Arduino over USB, do a request to the OpenWeatherMap API server for data and save all this into a MySQL/MariaDB database.  
+This script was created to receive the data from the Arduino over USB, do a request to the OpenWeatherMap API server for data and send this data to an API.  
   
 Python and pip must both be installed on the system to be able to run this script.
   
 ## Project setup
-Before installing anything, make sure that you filled in the config.json with your preffered information.  
-Also check if the USB port that your Arduino is connected on with your Rpi corresponds with the one in the script.
+Before installing anything, make sure that you filled in the config.json with your preferred information.  
+Also check if the USB port that your Arduino is connected on with your Raspberry Pi corresponds with the one in the script.
 
 After that, install all the dependencies with pip.
 ```
-pip install pyserial mysql-connector-python requests
+pip install pyserial requests
 ```
 
 Then simply run the script with the following command.
 ```
-python ArduinoToMySQL.py
+python DataToAPI.py
 ```
 
 #### Docker 

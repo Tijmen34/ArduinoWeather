@@ -14,28 +14,29 @@ time.sleep(0.5)
 
 # Create Openweathermap request parameters, containing the location and API token
 openweather_request_params = {'q': configData['openweathermap']['location'],
-                  'APPID': configData['openweathermap']['token']}
+                              'APPID': configData['openweathermap']['token']}
 
 # Define URLs to call
 openweather_url = 'http://api.openweathermap.org/data/2.5/weather'
 backend_url = configData['backend-url']
 
+
 # Function that posts the sensor + openweathermap data
-def postSensorData(sensorJson, outerWeatherData):
-    if outerWeatherData is None:
+def postSensorData(sensor_json, outer_weather_data):
+    if outer_weather_data is None:
         try:
             params_without_openweather = {
-                'BMP280' : {
-                    'temperature' : sensorJson["bmp280"]["temperature"],
-                    'altitude': sensorJson["bmp280"]["altitude"],
-                    'pressure': sensorJson["bmp280"]["pressure"]
+                'BMP280': {
+                    'temperature': sensor_json["bmp280"]["temperature"],
+                    'altitude': sensor_json["bmp280"]["altitude"],
+                    'pressure': sensor_json["bmp280"]["pressure"]
                 },
                 'DHT11': {
-                    'temperature': sensorJson["dht11"]["temperature"],
-                    'humidity': sensorJson["dht11"]["humidity"]
+                    'temperature': sensor_json["dht11"]["temperature"],
+                    'humidity': sensor_json["dht11"]["humidity"]
                 },
                 'DS18B20': {
-                    'temperature': sensorJson["ds18b20"]
+                    'temperature': sensor_json["ds18b20"]
                 }
             }
 
@@ -54,21 +55,21 @@ def postSensorData(sensorJson, outerWeatherData):
         try:
             params_with_openweather = {
                 'BMP280': {
-                    'temperature': sensorJson["bmp280"]["temperature"],
-                    'altitude': sensorJson["bmp280"]["altitude"],
-                    'pressure': sensorJson["bmp280"]["pressure"]
+                    'temperature': sensor_json["bmp280"]["temperature"],
+                    'altitude': sensor_json["bmp280"]["altitude"],
+                    'pressure': sensor_json["bmp280"]["pressure"]
                 },
                 'DHT11': {
-                    'temperature': sensorJson["dht11"]["temperature"],
-                    'humidity': sensorJson["dht11"]["humidity"]
+                    'temperature': sensor_json["dht11"]["temperature"],
+                    'humidity': sensor_json["dht11"]["humidity"]
                 },
                 'DS18B20': {
-                    'temperature': sensorJson["ds18b20"]
+                    'temperature': sensor_json["ds18b20"]
                 },
                 'Openweather': {
-                    'temperature': "{:.2f}".format(outerWeatherData["main"]["temp"] - 273.15),
-                    'humidity': outerWeatherData["main"]["humidity"],
-                    'pressure': outerWeatherData["main"]["pressure"]
+                    'temperature': "{:.2f}".format(outer_weather_data["main"]["temp"] - 273.15),
+                    'humidity': outer_weather_data["main"]["humidity"],
+                    'pressure': outer_weather_data["main"]["pressure"]
                 }
             }
 
@@ -82,6 +83,7 @@ def postSensorData(sensorJson, outerWeatherData):
             raise
         else:
             print("Completed post at", datetime.datetime.now())
+
 
 # Function to retrieve serial data
 def retrieveSerialData(serial):
@@ -106,7 +108,7 @@ while True:
         try:
             request = requests.get(openweather_url, params=openweather_request_params)
             request.raise_for_status()
-        except requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError as e:  # In case of a HTTP error code
             print("Failed to perform the Openweathermap HTTP request with error: ", e)
             try:
                 postSensorData(jsonData, None)
@@ -114,7 +116,7 @@ while True:
                 print(e)
             except requests.exceptions.RequestException as e:
                 print(e)
-        except requests.exceptions.RequestException as e:
+        except requests.exceptions.RequestException as e:  # In case of a request error
             print("Something went wrong... ", e)
             try:
                 postSensorData(jsonData, None)
