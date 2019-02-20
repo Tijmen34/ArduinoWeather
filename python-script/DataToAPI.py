@@ -66,7 +66,7 @@ def postSensorData(sensorJson, outerWeatherData):
                     'temperature': sensorJson["ds18b20"]
                 },
                 'Openweather': {
-                    'temperature': outerWeatherData["main"]["temp"],
+                    'temperature': "{:.2f}".format(outerWeatherData["main"]["temp"] - 273.15),
                     'humidity': outerWeatherData["main"]["humidity"],
                     'pressure': outerWeatherData["main"]["pressure"]
                 }
